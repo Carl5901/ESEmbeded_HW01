@@ -1,23 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int plus(int a, int b) { return a + b; }
-int minus(int a, int b) { return a - b; }
-int multiply(int a, int b) { return a * b; }
-int divided(int a, int b) { return a / b; }
+void plus(int a, int b) { printf("%d + %d = %d\n", a, b, a + b); }
+void minus(int a, int b) { printf("%d - %d = %d\n", a, b, a - b); }
+void multiply(int a, int b) { printf("%d * %d =%d\n", a, b, a * b); }
+void divided(int a, int b) { printf("%d / %d=%d\n", a, b, a / b); }
 int main()
 {
-	int a, c;
+	int a, c,fun;
 	char b;
 	printf("key a Function \nEX: 1 + 1\n");
 	scanf("%i %c %i", &a, &b, &c);
-	//IF ELSE IF
-	if (b == '+')
-		printf("%d %c %d = %d\n", a, b, c, plus(a, c));
-	else if (b == '-')
-		printf("%d %c %d = %d\n", a, b, c, minus(a, c));
-	else if (b == '*')
-		printf("%d %c %d = %d\n", a, b, c, multiply(a, c));
-	else if (b == '/')
-		printf("%d %c %d = %d\n", a, b, c, divided(a, c));
+	static void (*command[])(int,int) = { plus, minus, multiply, divided};
+	switch (b){
+	case '+' : fun=0;break;
+	case '-' : fun=1;break;
+	case '*' : fun=2;break;
+	case '/' : fun=3;break;
+	default :fun=-1;
+	}
+	if(fun<0) printf("Wrong function!\n");
+	command[fun](a,c);
+	return 0;
 }
